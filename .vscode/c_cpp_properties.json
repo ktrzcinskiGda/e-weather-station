@@ -1,0 +1,146 @@
+{
+    "configurations": [
+        {
+            "name": "Mac",
+            "includePath": [
+                "/usr/include",
+                "/usr/local/include",
+                "${workspaceRoot}"
+            ],
+            "defines": [],
+            "intelliSenseMode": "clang-x64",
+            "browse": {
+                "path": [
+                    "/usr/include",
+                    "/usr/local/include",
+                    "${workspaceRoot}"
+                ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": ""
+            },
+            "macFrameworkPath": [
+                "/System/Library/Frameworks",
+                "/Library/Frameworks"
+            ]
+        },
+        {
+            "name": "Linux",
+            "includePath": [
+                "/usr/include",
+                "/usr/local/include",
+                "${workspaceRoot}"
+            ],
+            "defines": [],
+            "intelliSenseMode": "clang-x64",
+            "browse": {
+                "path": [
+                    "/usr/include",
+                    "/usr/local/include",
+                    "${workspaceRoot}"
+                ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": ""
+            }
+        },
+        {
+            "name": "Win32",
+            "includePath": [
+                "C:/Program Files (x86)/Microsoft Visual Studio/2017/Enterprise/VC/Tools/MSVC/14.12.25827/include/*",
+                "C:/Program Files (x86)/Microsoft Visual Studio/2017/Enterprise/VC/Tools/MSVC/14.12.25827/atlmfc/include/*",
+                "C:/Program Files (x86)/Windows Kits/10/Include/10.0.16299.0/um",
+                "C:/Program Files (x86)/Windows Kits/10/Include/10.0.16299.0/ucrt",
+                "C:/Program Files (x86)/Windows Kits/10/Include/10.0.16299.0/shared",
+                "C:/Program Files (x86)/Windows Kits/10/Include/10.0.16299.0/winrt",
+                "${workspaceRoot}",
+                "${workspaceRoot}/Inc",
+                "${workspaceRoot}/Drivers/CMSIS/Include",
+                "${workspaceRoot}/Drivers/CMSIS/Device/ST/STM32F7xx/Include",
+                "${workspaceRoot}/Drivers/STM32F7xx_HAL_Driver/Inc",
+                "${workspaceRoot}/Middlewares/Third_Party/LwIP/src/include",
+                "${workspaceRoot}/Middlewares/Third_Party/LwIP/system",
+                "${workspaceRoot}/Drivers/STM32F7xx_HAL_Driver/Inc",
+                "${workspaceRoot}/Drivers/STM32F7xx_HAL_Driver/Inc/Legacy",
+                "${workspaceRoot}/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1",
+                "${workspaceRoot}/Middlewares/Third_Party/LwIP/src/include/netif/ppp",
+                "${workspaceRoot}/Middlewares/Third_Party/LwIP/src/apps/httpd",
+                "${workspaceRoot}/Middlewares/Third_Party/FatFs/src",
+                "${workspaceRoot}/Middlewares/Third_Party/FreeRTOS/Source/include",
+                "${workspaceRoot}/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS",
+                "${workspaceRoot}/Middlewares/Third_Party/LwIP/src/include/lwip",
+                "${workspaceRoot}/Middlewares/Third_Party/LwIP/src/include/lwip/apps",
+                "${workspaceRoot}/Middlewares/Third_Party/LwIP/src/include/lwip/priv",
+                "${workspaceRoot}/Middlewares/Third_Party/LwIP/src/include/lwip/prot",
+                "${workspaceRoot}/Middlewares/Third_Party/LwIP/src/include/netif",
+                "${workspaceRoot}/Middlewares/Third_Party/LwIP/src/include/posix",
+                "${workspaceRoot}/Middlewares/Third_Party/LwIP/src/include/posix/sys",
+                "${workspaceRoot}/Middlewares/Third_Party/LwIP/system/arch",
+                "${workspaceRoot}/Drivers/BSP/STM32746G-Discovery",
+                "${workspaceRoot}/Drivers/BSP/STM32746G-Discovery/Components",
+                "${workspaceRoot}/Drivers/BSP/STM32746G-Discovery/Components/Common",
+                "${workspaceRoot}/Middlewares/ST/STemWin/inc",
+                "${workspaceRoot}/STemWin/Target",
+                "${workspaceRoot}/STemWin/App",
+                "${workspaceRoot}/Utilities/Fonts",
+                "C:/GNU_Tools_ARM_Embedded/7_2017-q4-major/arm-none-eabi/include",
+                "C:/GNU_Tools_ARM_Embedded/7_2017-q4-major/lib/gcc/arm-none-eabi/7.2.1/include",
+                "C:/GNU_Tools_ARM_Embedded/7_2017-q4-major/lib/gcc/arm-none-eabi/7.2.1/include-fixed",
+                "D:/ele/STM/CubeMXRepo/STM32Cube_FW_F7_V1.11.0"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "intelliSenseMode": "msvc-x64",
+            "browse": {
+                "path": [
+                    "C:/Program Files (x86)/Microsoft Visual Studio/2017/Enterprise/VC/Tools/MSVC/14.12.25827/include/*",
+                    "C:/Program Files (x86)/Microsoft Visual Studio/2017/Enterprise/VC/Tools/MSVC/14.12.25827/atlmfc/include/*",
+                    "C:/Program Files (x86)/Windows Kits/10/Include/10.0.16299.0/um",
+                    "C:/Program Files (x86)/Windows Kits/10/Include/10.0.16299.0/ucrt",
+                    "C:/Program Files (x86)/Windows Kits/10/Include/10.0.16299.0/shared",
+                    "C:/Program Files (x86)/Windows Kits/10/Include/10.0.16299.0/winrt",
+                    "${workspaceRoot}",
+                    "${workspaceRoot}/Inc",
+                    "${workspaceRoot}/Drivers/CMSIS/Include",
+                    "${workspaceRoot}/Drivers/CMSIS/Device/ST/STM32F7xx/Include",
+                    "${workspaceRoot}/Drivers/STM32F7xx_HAL_Driver/Inc",
+                    "${workspaceRoot}/Middlewares/Third_Party/LwIP/src/include",
+                    "${workspaceRoot}/Middlewares/Third_Party/LwIP/system",
+                    "${workspaceRoot}/Drivers/STM32F7xx_HAL_Driver/Inc",
+                    "${workspaceRoot}/Drivers/STM32F7xx_HAL_Driver/Inc/Legacy",
+                    "${workspaceRoot}/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1",
+                    "${workspaceRoot}/Middlewares/Third_Party/LwIP/src/include/netif/ppp",
+                    "${workspaceRoot}/Middlewares/Third_Party/LwIP/src/apps/httpd",
+                    "${workspaceRoot}/Middlewares/Third_Party/FatFs/src",
+                    "${workspaceRoot}/Middlewares/Third_Party/FreeRTOS/Source/include",
+                    "${workspaceRoot}/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS",
+                    "${workspaceRoot}/Middlewares/Third_Party/LwIP/src/include/lwip",
+                    "${workspaceRoot}/Middlewares/Third_Party/LwIP/src/include/lwip/apps",
+                    "${workspaceRoot}/Middlewares/Third_Party/LwIP/src/include/lwip/priv",
+                    "${workspaceRoot}/Middlewares/Third_Party/LwIP/src/include/lwip/prot",
+                    "${workspaceRoot}/Middlewares/Third_Party/LwIP/src/include/netif",
+                    "${workspaceRoot}/Middlewares/Third_Party/LwIP/src/include/posix",
+                    "${workspaceRoot}/Middlewares/Third_Party/LwIP/src/include/posix/sys",
+                    "${workspaceRoot}/Middlewares/Third_Party/LwIP/system/arch",
+                    "${workspaceRoot}/Drivers/BSP/STM32746G-Discovery",
+                    "${workspaceRoot}/Drivers/BSP/STM32746G-Discovery/Components",
+                    "${workspaceRoot}/Drivers/BSP/STM32746G-Discovery/Components/Common",
+                    "${workspaceRoot}/Middlewares/ST/STemWin/inc",
+                    "${workspaceRoot}/STemWin/Target",
+                    "${workspaceRoot}/STemWin/App",
+                    "${workspaceRoot}/Utilities/Fonts",
+                    "C:/GNU_Tools_ARM_Embedded/7_2017-q4-major/arm-none-eabi/include",
+                    "C:/GNU_Tools_ARM_Embedded/7_2017-q4-major/lib/gcc/arm-none-eabi/7.2.1/include",
+                    "C:/GNU_Tools_ARM_Embedded/7_2017-q4-major/lib/gcc/arm-none-eabi/7.2.1/include-fixed",
+                    "D:/ele/STM/CubeMXRepo/STM32Cube_FW_F7_V1.11.0"
+                ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": ""
+            },
+            "cStandard": "c11",
+            "cppStandard": "c++17"
+        }
+    ],
+    "version": 3
+}

@@ -55,7 +55,7 @@
 #include "stm32f7xx_hal.h"
 
 /*-----------------------------------------------------------------------------*/
-/* Current version of LwIP supported by CubeMx: 2.0.0 -*/
+/* Current version of LwIP supported by CubeMx: 2.0.3 -*/
 /*-----------------------------------------------------------------------------*/
 
 /* Within 'USER CODE' section, code will be kept by default at each generation */
@@ -119,108 +119,16 @@
 #define RECV_BUFSIZE_DEFAULT 2000000000
 /*----- Default Value for LWIP_HTTPD: 0 ---*/
 #define LWIP_HTTPD 1
-/*----- Default Value for LWIP_HTTPD_CGI: ---*/
+/*----- Default Value for LWIP_HTTPD_CGI: 0 ---*/
 #define LWIP_HTTPD_CGI 1
-/*----- Default Value for LWIP_HTTPD_CGI_SSI: ---*/
-#define LWIP_HTTPD_CGI_SSI 0
-/*----- Default Value for LWIP_HTTPD_SSI: ---*/
-#define LWIP_HTTPD_SSI 0
-/*----- Default Value for LWIP_HTTPD_SSI_RAW: ---*/
-#define LWIP_HTTPD_SSI_RAW 0
-/*----- Default Value for LWIP_HTTPD_SUPPORT_POST: ---*/
-#define LWIP_HTTPD_SUPPORT_POST 0
-/*----- Default Value for LWIP_HTTPD_MAX_CGI_PARAMETERS: ---*/
-#define LWIP_HTTPD_MAX_CGI_PARAMETERS 16
-/*----- Default Value for LWIP_HTTPD_SSI_MULTIPART: ---*/
-#define LWIP_HTTPD_SSI_MULTIPART 0
-/*----- Default Value for LWIP_HTTPD_MAX_TAG_NAME_LEN: ---*/
-#define LWIP_HTTPD_MAX_TAG_NAME_LEN 8
-/*----- Default Value for LWIP_HTTPD_MAX_TAG_INSERT_LEN: ---*/
-#define LWIP_HTTPD_MAX_TAG_INSERT_LEN 192
-/*----- Default Value for LWIP_HTTPD_POST_MANUAL_WND: ---*/
-#define LWIP_HTTPD_POST_MANUAL_WND 0
-/*----- Default Value for HTTPD_SERVER_AGENT: ---*/
-#define HTTPD_SERVER_AGENT "lwIP/2.0.0 (http://savannah.nongnu.org/projects/lwip)"
-/*----- Default Value for LWIP_HTTPD_DYNAMIC_HEADERS: ---*/
-#define LWIP_HTTPD_DYNAMIC_HEADERS 0
-/*----- Default Value for HTTPD_USE_MEM_POOL: ---*/
-#define HTTPD_USE_MEM_POOL 0
-/*----- Default Value for HTTPD_SERVER_PORT: ---*/
-#define HTTPD_SERVER_PORT 80
-/*----- Default Value for HTTPD_MAX_RETRIES: ---*/
-#define HTTPD_MAX_RETRIES 4
-/*----- Default Value for HTTPD_POLL_INTERVAL: ---*/
-#define HTTPD_POLL_INTERVAL 4
-/*----- Default Value for HTTPD_TCP_PRIO: ---*/
-#define HTTPD_TCP_PRIO 1
-/*----- Default Value for LWIP_HTTPD_TIMING: ---*/
-#define LWIP_HTTPD_TIMING 0
-/*----- Default Value for LWIP_HTTPD_SUPPORT_EXTSTATUS: ---*/
-#define LWIP_HTTPD_SUPPORT_EXTSTATUS 0
-/*----- Default Value for LWIP_HTTPD_SUPPORT_V09: ---*/
-#define LWIP_HTTPD_SUPPORT_V09 1
-/*----- Default Value for LWIP_HTTPD_SUPPORT_11_KEEPALIVE: ---*/
-#define LWIP_HTTPD_SUPPORT_11_KEEPALIVE 0
-/*----- Default Value for LWIP_HTTPD_SUPPORT_REQUESTLIST: ---*/
-#define LWIP_HTTPD_SUPPORT_REQUESTLIST 1
-/*----- Default Value for LWIP_HTTPD_REQ_QUEUELEN: ---*/
-#define LWIP_HTTPD_REQ_QUEUELEN 5
-/*----- Default Value for LWIP_HTTPD_REQ_BUFSIZE: ---*/
-#define LWIP_HTTPD_REQ_BUFSIZE 1023
-/*----- Default Value for LWIP_HTTPD_MAX_REQ_LENGTH: ---*/
-#define LWIP_HTTPD_MAX_REQ_LENGTH 1023
-/*----- Default Value for LWIP_HTTPD_MAX_REQUEST_URI_LEN: ---*/
-#define LWIP_HTTPD_MAX_REQUEST_URI_LEN 63
-/*----- Default Value for LWIP_HTTPD_POST_MAX_RESPONSE_URI_LEN: ---*/
-#define LWIP_HTTPD_POST_MAX_RESPONSE_URI_LEN 63
-/*----- Default Value for LWIP_HTTPD_SSI_INCLUDE_TAG: ---*/
-#define LWIP_HTTPD_SSI_INCLUDE_TAG 1
-/*----- Default Value for LWIP_HTTPD_ABORT_ON_CLOSE_MEM_ERROR: ---*/
-#define LWIP_HTTPD_ABORT_ON_CLOSE_MEM_ERROR 0
-/*----- Default Value for LWIP_HTTPD_KILL_OLD_ON_CONNECTIONS_EXCEEDED: ---*/
-#define LWIP_HTTPD_KILL_OLD_ON_CONNECTIONS_EXCEEDED 0
-/*----- Default Value for LWIP_HTTPD_OMIT_HEADER_FOR_EXTENSIONLESS_URI: ---*/
-#define LWIP_HTTPD_OMIT_HEADER_FOR_EXTENSIONLESS_URI 0
-/*----- Default Value for HTTPD_LIMIT_SENDING_TO_2MSS: ---*/
-#define HTTPD_LIMIT_SENDING_TO_2MSS 1
-/*----- Default Value for LWIP_HTTPD_CUSTOM_FILES: ---*/
+/*----- Default Value for LWIP_HTTPD_CUSTOM_FILES: 0 ---*/
 #define LWIP_HTTPD_CUSTOM_FILES 1
-/*----- Default Value for LWIP_HTTPD_DYNAMIC_FILE_READ: ---*/
+/*----- Default Value for LWIP_HTTPD_DYNAMIC_FILE_READ: 0 ---*/
 #define LWIP_HTTPD_DYNAMIC_FILE_READ 1
-/*----- Default Value for LWIP_HTTPD_FILE_STATE: ---*/
-#define LWIP_HTTPD_FILE_STATE 0
-/*----- Default Value for HTTPD_PRECALCULATED_CHECKSUM: ---*/
-#define HTTPD_PRECALCULATED_CHECKSUM 0
-/*----- Default Value for LWIP_HTTPD_FS_ASYNC_READ: ---*/
-#define LWIP_HTTPD_FS_ASYNC_READ 0
-/*----- Default Value for HTTPD_USE_CUSTOM_FSDATA: ---*/
+/*----- Default Value for HTTPD_USE_CUSTOM_FSDATA: 0 ---*/
 #define HTTPD_USE_CUSTOM_FSDATA 1
 /*----- Default Value for LWIP_SNTP: 0 ---*/
 #define LWIP_SNTP 1
-/*----- Default Value for SNTP_MAX_SERVERS: ---*/
-#define SNTP_MAX_SERVERS 1
-/*----- Default Value for SNTP_GET_SERVERS_FROM_DHCP: ---*/
-#define SNTP_GET_SERVERS_FROM_DHCP 0
-/*----- Default Value for SNTP_SERVER_DNS: ---*/
-#define SNTP_SERVER_DNS 0
-/*----- Default Value for SNTP_PORT: ---*/
-#define SNTP_PORT 123
-/*----- Default Value for SNTP_CHECK_RESPONSE: ---*/
-#define SNTP_CHECK_RESPONSE 0
-/*----- Default Value for SNTP_STARTUP_DELAY: ---*/
-#define SNTP_STARTUP_DELAY 0
-/*----- Default Value for SNTP_STARTUP_DELAY_FUNC: ---*/
-#define SNTP_STARTUP_DELAY_FUNC 0
-/*----- Default Value for SNTP_RECV_TIMEOUT: ---*/
-#define SNTP_RECV_TIMEOUT 3000
-/*----- Default Value for SNTP_UPDATE_DELAY: ---*/
-#define SNTP_UPDATE_DELAY 3600000
-/*----- Default Value for SNTP_RETRY_TIMEOUT: ---*/
-#define SNTP_RETRY_TIMEOUT 3000
-/*----- Default Value for SNTP_RETRY_TIMEOUT_MAX: ---*/
-#define SNTP_RETRY_TIMEOUT_MAX 30000
-/*----- Default Value for SNTP_RETRY_TIMEOUT_EXP: ---*/
-#define SNTP_RETRY_TIMEOUT_EXP 1
 /*----- Value in opt.h for LWIP_STATS: 1 -----*/
 #define LWIP_STATS 0
 /*----- Value in opt.h for CHECKSUM_GEN_IP: 1 -----*/

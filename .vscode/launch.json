@@ -1,0 +1,21 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "cortex-debug",
+            "request": "launch",
+            "servertype": "openocd",
+            "cwd": "${workspaceRoot}/build",
+            "executable": "./e-weather-station.elf",
+            "name": "OpenOCD", 
+            // "device": "STM32F746",
+            "svdFile": "C:/GNU_Tools_ARM_Embedded/cmsis/STMicroelectronics_CMSIS_SVD/STM32F7x6.svd",
+            "searchDir": [
+                "C:/GNU_Tools_ARM_Embedded/openocd/st_scripts"
+            ],
+            "configFiles": [
+                "${workspaceRoot}/e-weather-station_Debug.cfg"
+            ]
+        }
+    ]
+}
