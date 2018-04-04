@@ -5,3 +5,6 @@ build
 
 #Ignore Release_Notes
 Release_Notes.html
+
+#Visual Studio Code
+.vscode
