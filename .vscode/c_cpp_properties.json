@@ -81,9 +81,9 @@
                 "${workspaceRoot}/STemWin/Target",
                 "${workspaceRoot}/STemWin/App",
                 "${workspaceRoot}/Utilities/Fonts",
-                "C:/GNU_Tools_ARM_Embedded/7_2017-q4-major/arm-none-eabi/include",
-                "C:/GNU_Tools_ARM_Embedded/7_2017-q4-major/lib/gcc/arm-none-eabi/7.2.1/include",
-                "C:/GNU_Tools_ARM_Embedded/7_2017-q4-major/lib/gcc/arm-none-eabi/7.2.1/include-fixed",
+                "C:/Program Files (x86)/GNU Tools ARM Embedded/7 2017-q4-major/arm-none-eabi/include",
+                "C:/Program Files (x86)/GNU Tools ARM Embedded/7 2017-q4-major/lib/gcc/arm-none-eabi/7.2.1/include",
+                "C:/Program Files (x86)/GNU Tools ARM Embedded/7 2017-q4-major/lib/gcc/arm-none-eabi/7.2.1/include-fixed",
                 "D:/ele/STM/CubeMXRepo/STM32Cube_FW_F7_V1.11.0"
             ],
             "defines": [
@@ -130,10 +130,10 @@
                     "${workspaceRoot}/STemWin/Target",
                     "${workspaceRoot}/STemWin/App",
                     "${workspaceRoot}/Utilities/Fonts",
-                    "C:/GNU_Tools_ARM_Embedded/7_2017-q4-major/arm-none-eabi/include",
-                    "C:/GNU_Tools_ARM_Embedded/7_2017-q4-major/lib/gcc/arm-none-eabi/7.2.1/include",
-                    "C:/GNU_Tools_ARM_Embedded/7_2017-q4-major/lib/gcc/arm-none-eabi/7.2.1/include-fixed",
-                    "D:/ele/STM/CubeMXRepo/STM32Cube_FW_F7_V1.11.0"
+                    "C:/Program Files (x86)/GNU Tools ARM Embedded/7 2017-q4-major/arm-none-eabi/include",
+                    "C:/Program Files (x86)/GNU Tools ARM Embedded/7 2017-q4-major/lib/gcc/arm-none-eabi/7.2.1/include",
+                    "C:/Program Files (x86)/GNU Tools ARM Embedded/7 2017-q4-major/lib/gcc/arm-none-eabi/7.2.1/include-fixed",
+                    "C:/Users/Karol/STM32Cube/Repository/STM32Cube_FW_F7_V1.8.0"
                 ],
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": ""
@@ -142,5 +142,5 @@
             "cppStandard": "c++17"
         }
     ],
-    "version": 3
+    "version": 4
 }
