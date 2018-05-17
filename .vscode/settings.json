@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "main.h": "c",
+        "stm32f7xx_hal.h": "c",
+        "stm32746g_discovery.h": "c",
+        "stm32746g_discovery_sdram.h": "c",
+        "stm32f7xx_ll_fmc.h": "c",
+        "stm32f7xx_hal_dma.h": "c",
+        "stm32f7xx_hal_uart.h": "c"
+    }
+}

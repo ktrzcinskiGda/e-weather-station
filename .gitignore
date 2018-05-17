@@ -9,12 +9,13 @@ CMakeLists.txt
 
 # Prerequisites
 *.d
+#CubeMX
+build
+*.scratch
+*.mxproject
 
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
+#Ignore Release_Notes
+Release_Notes.html
 
 # Linker output
 *.ilk
@@ -60,3 +61,5 @@ Module.symvers
 Mkfile.old
 dkms.conf
 /Debug/
+#Visual Studio Code
+.vscode
