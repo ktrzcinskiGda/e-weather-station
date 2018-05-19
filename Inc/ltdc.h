@@ -1,9 +1,17 @@
 /**
   ******************************************************************************
-  * @attention
+  * File Name          : LTDC.h
+  * Description        : This file provides code for the configuration
+  *                      of the LTDC instances.
+  ******************************************************************************
+  * This notice applies to any and all portions of this file
+  * that are not between comment pairs USER CODE BEGIN and
+  * USER CODE END. Other portions of this file, whether 
+  * inserted by the user or by software development tools
+  * are owned by their respective copyright owners.
   *
-  * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics International N.V. 
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2018 STMicroelectronics International N.V. 
+  * All rights reserved.
   *
   * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
@@ -38,25 +46,46 @@
   *
   ******************************************************************************
   */
+/* Define to prevent recursive inclusion -------------------------------------*/
+#ifndef __ltdc_H
+#define __ltdc_H
+#ifdef __cplusplus
+ extern "C" {
+#endif
+
+/* Includes ------------------------------------------------------------------*/
+#include "stm32f7xx_hal.h"
 #include "main.h"
-#include "GUIDRV_Lin.h"
 
-#ifndef LCDCONF_H
-#define LCDCONF_H
+/* USER CODE BEGIN Includes */
 
+/* USER CODE END Includes */
 
-typedef struct
-{
-  int32_t      address;          
-  __IO int32_t pending_buffer;   
-  int32_t      buffer_index;     
-  int32_t      xSize;            
-  int32_t      ySize;            
-  int32_t      BytesPerPixel;
-  LCD_API_COLOR_CONV   *pColorConvAPI;
+extern LTDC_HandleTypeDef hltdc;
+
+/* USER CODE BEGIN Private defines */
+
+/* USER CODE END Private defines */
+
+extern void _Error_Handler(char *, int);
+
+void MX_LTDC_Init(void);
+
+/* USER CODE BEGIN Prototypes */
+
+/* USER CODE END Prototypes */
+
+#ifdef __cplusplus
 }
-LCD_LayerPropTypedef;
+#endif
+#endif /*__ ltdc_H */
 
-#endif /* LCDCONF_H */
+/**
+  * @}
+  */
 
-/*************************** End of file ****************************/
+/**
+  * @}
+  */
+
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

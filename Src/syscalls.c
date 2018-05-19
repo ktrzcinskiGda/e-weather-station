@@ -125,12 +125,6 @@ caddr_t _sbrk(int incr)
 /*
  * _gettimeofday primitive (Stub function)
  * */
-#ifndef _SYS_TIME_H_
-struct timezone {
-	int	tz_minuteswest;	/* minutes west of Greenwich */
-	int	tz_dsttime;	/* type of dst correction */
-};
-#endif
 
 int _gettimeofday (struct timeval * tp, struct timezone * tzp)
 {

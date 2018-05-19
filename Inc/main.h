@@ -55,9 +55,7 @@
 #include "stm32f7xx_hal.h"
 
 /* USER CODE BEGIN Includes */
-#include "GUI.h"
-#include "stm32746g_discovery.h"
-#include "stm32746g_discovery_sdram.h"
+
 /* USER CODE END Includes */
 
 /* Private define ------------------------------------------------------------*/

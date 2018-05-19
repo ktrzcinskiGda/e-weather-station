@@ -1,12 +1,12 @@
   /**
   ******************************************************************************
-  * @file    GUIConf.h
+  * @file    HW_Init.h 
   * @author  MCD Application Team
-  * @brief   Configures STemWin abilities, fonts etc 
+  * @brief   Header for HW_Init.c module
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2018 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -43,43 +43,21 @@
   ******************************************************************************
   */
 
-#ifndef GUICONF_H
-#define GUICONF_H
+/* Define to prevent recursive inclusion -------------------------------------*/
+#ifndef __HW_INIT_H
+#define __HW_INIT_H
 
-/*********************************************************************
-*
-*       Multi layer/display support
-*/
-#define GUI_NUM_LAYERS         (2)   // Maximum number of available layers
+/* Includes ------------------------------------------------------------------*/
+#include "main.h"
 
-/*********************************************************************
-*
-*    Multi tasking support
-*/
-       
- #define GUI_OS              (1)       // Compile with multitasking support
+/* Exported types ------------------------------------------------------------*/
+/* Exported constants --------------------------------------------------------*/
 
-/*********************************************************************
-*
-*       Configuration of touch support
-*/
-#ifndef   GUI_SUPPORT_TOUCH
-  #define GUI_SUPPORT_TOUCH       (1)  // Support touchscreen
-#endif
+void MX_FMC_Init(void);
+void MX_SDRAM_InitEx(void);
+void MX_LCD_Init(void);
+void MX_DMA2D_Init(void);
 
-/*********************************************************************
-*
-*       Default font
-*/
-#define GUI_DEFAULT_FONT               &Font6x8
+#endif /* __HW_INIT_H */
 
-/*********************************************************************
-*
-*         Configuration of available packages
-*/
-#define GUI_SUPPORT_MOUSE             (1)    /* Support a mouse */
-#define GUI_WINSUPPORT                (1)    /* Use window manager */
-#define GUI_SUPPORT_MEMDEV            (1)    /* Memory device package available */
-#define GUI_SUPPORT_DEVICES           (1)    /* Enable use of device pointers */
- 
-#endif  /* Avoid multiple inclusion */
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
