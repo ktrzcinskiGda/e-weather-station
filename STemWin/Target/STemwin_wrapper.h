@@ -44,7 +44,6 @@
   */
   
 #include "main.h"
-#include "GUI.h"
 #include "GUIDRV_Lin.h"
 #include <stdint.h>
 

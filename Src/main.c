@@ -56,30 +56,28 @@
 #include "sdmmc.h"
 #include "usart.h"
 #include "gpio.h"
-#include "fmc.h"
-
 
 /* USER CODE BEGIN Includes */
-#include "WM.h"
+#include "stm32746g_discovery_lcd.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
-uint8_t GUI_Initialized = 0;
-//TIM_HandleTypeDef TimHandle;
-uint32_t uwPrescalerValue = 0;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 void MX_FREERTOS_Init(void);
-void GRAPHICS_MainTask1(void);
+extern void GRAPHICS_HW_Init(void);
+extern void GRAPHICS_Init(void);
+extern void GRAPHICS_MainTask(void);
 
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
-static void CPU_CACHE_Enable(void);
+
 /* USER CODE END PFP */
 
 /* USER CODE BEGIN 0 */
@@ -94,7 +92,7 @@ static void CPU_CACHE_Enable(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-  CPU_CACHE_Enable();
+
   /* USER CODE END 1 */
 
   /* MCU Configuration----------------------------------------------------------*/
@@ -103,6 +101,7 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
+
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -115,39 +114,37 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_USART1_UART_Init();
-  MX_FMC_Init();
   MX_SDMMC1_SD_Init();
   MX_CRC_Init();
   /* USER CODE BEGIN 2 */
-  /***********************************************************/
-  
-  /* Init the STemWin GUI Library */
-  BSP_SDRAM_Init(); /* Initializes the SDRAM device */
-  __HAL_RCC_CRC_CLK_ENABLE(); /* Enable the CRC Module */
-  GUI_Init();
-  
-  GUI_DispStringAt("Starting...", 0, 0);
-
-  GUI_Initialized = 1;
-  
-  /* Activate the use of memory device feature */
-  WM_SetCreateFlags(WM_CF_MEMDEV);
-
+  BSP_LCD_Init();
+  BSP_LCD_LayerDefaultInit(0, LCD_FB_START_ADDRESS);
+  BSP_LCD_LayerDefaultInit(1, LCD_FB_START_ADDRESS+(BSP_LCD_GetXSize()*BSP_LCD_GetYSize()*4));
+  BSP_LCD_DisplayOn();
+  BSP_LCD_SelectLayer(0);
+  BSP_LCD_Clear(LCD_COLOR_BLACK);
+  BSP_LCD_SelectLayer(1);
+  BSP_LCD_Clear(LCD_COLOR_BLACK);
+  BSP_LCD_DisplayStringAtLine(2, "Czesc Igor");
 
   /* USER CODE END 2 */
 
+/* Initialise the graphical hardware */
+  //GRAPHICS_HW_Init();
+
+  /* Initialise the graphical stack engine */
+  //GRAPHICS_Init();
+      
   /* Call init function for freertos objects (in freertos.c) */
-  //MX_FREERTOS_Init();
+  MX_FREERTOS_Init();
 
   /* Start scheduler */
-  // osKernelStart();
+  osKernelStart();
   
   /* We should never get here as control is now taken by the scheduler */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  GRAPHICS_MainTask1();
-
   while (1)
   {
 
@@ -164,23 +161,6 @@ int main(void)
   * @brief System Clock Configuration
   * @retval None
   */
-
-void GRAPHICS_MainTask1(void) {
-/* USER CODE BEGIN GRAPHICS_MainTask */
- /* User can implement his graphic application here */
-  /* Hello Word example */
-    GUI_Clear();
-    //GUI_SetColor(GUI_WHITE);
-    //GUI_SetFont(&GUI_Font20_1);
-    GUI_DispStringAt("Hello world!", (LCD_GetXSize()-150)/2, (LCD_GetYSize()-20)/2);
-   
-/* USER CODE END GRAPHICS_MainTask */
-  while(1)
-{
-      GUI_Delay(100);
-}
-}
-
 void SystemClock_Config(void)
 {
 
@@ -197,7 +177,7 @@ void SystemClock_Config(void)
     /**Initializes the CPU, AHB and APB busses clocks 
     */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
-  RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+  RCC_OscInitStruct.HSEState = RCC_HSE_BYPASS;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
   RCC_OscInitStruct.PLL.PLLM = 25;
@@ -259,15 +239,6 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-
-static void CPU_CACHE_Enable(void)
-{
-  /* Enable I-Cache */
-  SCB_EnableICache();
-
-  /* Enable D-Cache */
-  SCB_EnableDCache();
-}
 
 /* USER CODE END 4 */
 

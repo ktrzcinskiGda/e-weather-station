@@ -64,17 +64,17 @@
 * @}
 */ 
 
-#define XSIZE_PHYS      240
-#define YSIZE_PHYS      320   
+#define XSIZE_PHYS      640
+#define YSIZE_PHYS      480   
 
-#define NUM_BUFFERS         1   /* Number of multiple buffers to be used */
+#define NUM_BUFFERS         2   /* Number of multiple buffers to be used */
 #define NUM_VSCREENS        1  /* Number of virtual screens to be used */
 
-#define COLOR_CONVERSION_0      GUICC_565
-#define DISPLAY_DRIVER_0        GUIDRV_LIN_16
+#define COLOR_CONVERSION_0      GUICC_8888
+#define DISPLAY_DRIVER_0        GUIDRV_LIN_32
 
-#define COLOR_CONVERSION_1      GUICC_565
-#define DISPLAY_DRIVER_1        GUIDRV_LIN_16
+#define COLOR_CONVERSION_1      GUICC_8888
+#define DISPLAY_DRIVER_1        GUIDRV_LIN_32
 
 #define LCD_LAYER0_FRAME_BUFFER        ((uint32_t)0x0) /* LTDC Layer 0 frame buffer */
 #define LCD_LAYER1_FRAME_BUFFER        ((uint32_t)0x0) /* LTDC Layer 0 frame buffer */
@@ -891,8 +891,8 @@ void GRAPHICS_Init(void)
   /* Initialize the GUI */
   GUI_Init();
 
+   WM_MULTIBUF_Enable(1);
 /* Enable the multi-buffering functionality */
-  // WM_MULTIBUF_Enable(1);
 
   /* Activate the use of memory device feature */
      /* USER CODE BEGIN WM_SetCreateFlags */

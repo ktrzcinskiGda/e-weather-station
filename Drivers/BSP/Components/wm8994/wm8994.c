@@ -465,8 +465,8 @@ uint32_t wm8994_Init(uint16_t DeviceAddr, uint16_t OutputInputDevice, uint8_t Vo
   /* Enable AIF1 Clock, AIF1 Clock Source = MCLK1 pin */
   counter += CODEC_IO_Write(DeviceAddr, 0x200, 0x0001);
 
-  if (output_device > 0)  /* Audio output selected */  
-  {  
+  if (output_device > 0)  /* Audio output selected */
+  {
     if (output_device == OUTPUT_DEVICE_HEADPHONE)
     {      
       /* Select DAC1 (Left) to Left Headphone Output PGA (HPOUT1LVOL) path */
@@ -494,73 +494,70 @@ uint32_t wm8994_Init(uint16_t DeviceAddr, uint16_t OutputInputDevice, uint8_t Vo
       /* Soft un-Mute the AIF1 Timeslot 0 DAC1 path L&R */
       counter += CODEC_IO_Write(DeviceAddr, 0x420, 0x0000);
     }
+    /* Analog Output Configuration */
+
+    /* Enable SPKRVOL PGA, Enable SPKMIXR, Enable SPKLVOL PGA, Enable SPKMIXL */
+    counter += CODEC_IO_Write(DeviceAddr, 0x03, 0x0300);
+
+    /* Left Speaker Mixer Volume = 0dB */
+    counter += CODEC_IO_Write(DeviceAddr, 0x22, 0x0000);
+
+    /* Speaker output mode = Class D, Right Speaker Mixer Volume = 0dB ((0x23, 0x0100) = class AB)*/
+    counter += CODEC_IO_Write(DeviceAddr, 0x23, 0x0000);
+
+    /* Unmute DAC2 (Left) to Left Speaker Mixer (SPKMIXL) path,
+    Unmute DAC2 (Right) to Right Speaker Mixer (SPKMIXR) path */
+    counter += CODEC_IO_Write(DeviceAddr, 0x36, 0x0300);
+
+    /* Enable bias generator, Enable VMID, Enable SPKOUTL, Enable SPKOUTR */
+    counter += CODEC_IO_Write(DeviceAddr, 0x01, 0x3003);
+
+    /* Headphone/Speaker Enable */
+
+    if (input_device == INPUT_DEVICE_DIGITAL_MIC1_MIC2)
+    {
+    /* Enable Class W, Class W Envelope Tracking = AIF1 Timeslots 0 and 1 */
+    counter += CODEC_IO_Write(DeviceAddr, 0x51, 0x0205);
+    }
     else
     {
-      /* Analog Output Configuration */
-
-      /* Enable SPKRVOL PGA, Enable SPKMIXR, Enable SPKLVOL PGA, Enable SPKMIXL */
-      counter += CODEC_IO_Write(DeviceAddr, 0x03, 0x0300);
-
-      /* Left Speaker Mixer Volume = 0dB */
-      counter += CODEC_IO_Write(DeviceAddr, 0x22, 0x0000);
-
-      /* Speaker output mode = Class D, Right Speaker Mixer Volume = 0dB ((0x23, 0x0100) = class AB)*/
-      counter += CODEC_IO_Write(DeviceAddr, 0x23, 0x0000);
-
-      /* Unmute DAC2 (Left) to Left Speaker Mixer (SPKMIXL) path,
-      Unmute DAC2 (Right) to Right Speaker Mixer (SPKMIXR) path */
-      counter += CODEC_IO_Write(DeviceAddr, 0x36, 0x0300);
-
-      /* Enable bias generator, Enable VMID, Enable SPKOUTL, Enable SPKOUTR */
-      counter += CODEC_IO_Write(DeviceAddr, 0x01, 0x3003);
-
-      /* Headphone/Speaker Enable */
-
-      if (input_device == INPUT_DEVICE_DIGITAL_MIC1_MIC2)
-      {
-      /* Enable Class W, Class W Envelope Tracking = AIF1 Timeslots 0 and 1 */
-      counter += CODEC_IO_Write(DeviceAddr, 0x51, 0x0205);
-      }
-      else
-      {
-      /* Enable Class W, Class W Envelope Tracking = AIF1 Timeslot 0 */
-      counter += CODEC_IO_Write(DeviceAddr, 0x51, 0x0005);      
-      }
-
-      /* Enable bias generator, Enable VMID, Enable HPOUT1 (Left) and Enable HPOUT1 (Right) input stages */
-      /* idem for Speaker */
-      power_mgnt_reg_1 |= 0x0303 | 0x3003;
-      counter += CODEC_IO_Write(DeviceAddr, 0x01, power_mgnt_reg_1);
-
-      /* Enable HPOUT1 (Left) and HPOUT1 (Right) intermediate stages */
-      counter += CODEC_IO_Write(DeviceAddr, 0x60, 0x0022);
-
-      /* Enable Charge Pump */
-      counter += CODEC_IO_Write(DeviceAddr, 0x4C, 0x9F25);
-
-      /* Add Delay */
-      AUDIO_IO_Delay(15);
-
-      /* Select DAC1 (Left) to Left Headphone Output PGA (HPOUT1LVOL) path */
-      counter += CODEC_IO_Write(DeviceAddr, 0x2D, 0x0001);
-
-      /* Select DAC1 (Right) to Right Headphone Output PGA (HPOUT1RVOL) path */
-      counter += CODEC_IO_Write(DeviceAddr, 0x2E, 0x0001);
-
-      /* Enable Left Output Mixer (MIXOUTL), Enable Right Output Mixer (MIXOUTR) */
-      /* idem for SPKOUTL and SPKOUTR */
-      counter += CODEC_IO_Write(DeviceAddr, 0x03, 0x0030 | 0x0300);
-
-      /* Enable DC Servo and trigger start-up mode on left and right channels */
-      counter += CODEC_IO_Write(DeviceAddr, 0x54, 0x0033);
-
-      /* Add Delay */
-      AUDIO_IO_Delay(257);
-
-      /* Enable HPOUT1 (Left) and HPOUT1 (Right) intermediate and output stages. Remove clamps */
-      counter += CODEC_IO_Write(DeviceAddr, 0x60, 0x00EE);
-
+    /* Enable Class W, Class W Envelope Tracking = AIF1 Timeslot 0 */
+    counter += CODEC_IO_Write(DeviceAddr, 0x51, 0x0005);      
     }
+
+    /* Enable bias generator, Enable VMID, Enable HPOUT1 (Left) and Enable HPOUT1 (Right) input stages */
+    /* idem for Speaker */
+    power_mgnt_reg_1 |= 0x0303 | 0x3003;
+    counter += CODEC_IO_Write(DeviceAddr, 0x01, power_mgnt_reg_1);
+
+    /* Enable HPOUT1 (Left) and HPOUT1 (Right) intermediate stages */
+    counter += CODEC_IO_Write(DeviceAddr, 0x60, 0x0022);
+
+    /* Enable Charge Pump */
+    counter += CODEC_IO_Write(DeviceAddr, 0x4C, 0x9F25);
+
+    /* Add Delay */
+    AUDIO_IO_Delay(15);
+
+    /* Select DAC1 (Left) to Left Headphone Output PGA (HPOUT1LVOL) path */
+    counter += CODEC_IO_Write(DeviceAddr, 0x2D, 0x0001);
+
+    /* Select DAC1 (Right) to Right Headphone Output PGA (HPOUT1RVOL) path */
+    counter += CODEC_IO_Write(DeviceAddr, 0x2E, 0x0001);
+
+    /* Enable Left Output Mixer (MIXOUTL), Enable Right Output Mixer (MIXOUTR) */
+    /* idem for SPKOUTL and SPKOUTR */
+    counter += CODEC_IO_Write(DeviceAddr, 0x03, 0x0030 | 0x0300);
+
+    /* Enable DC Servo and trigger start-up mode on left and right channels */
+    counter += CODEC_IO_Write(DeviceAddr, 0x54, 0x0033);
+
+    /* Add Delay */
+    AUDIO_IO_Delay(257);
+
+    /* Enable HPOUT1 (Left) and HPOUT1 (Right) intermediate and output stages. Remove clamps */
+    counter += CODEC_IO_Write(DeviceAddr, 0x60, 0x00EE);
+
     /* Unmutes */
 
     /* Unmute DAC 1 (Left) */

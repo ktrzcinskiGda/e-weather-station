@@ -59,7 +59,7 @@
 osThreadId defaultTaskHandle;
 
 /* USER CODE BEGIN Variables */
-
+osThreadId statDispTaskHandler;
 /* USER CODE END Variables */
 
 /* Function prototypes -------------------------------------------------------*/
@@ -67,10 +67,11 @@ void StartDefaultTask(void const * argument);
 
 extern void MX_LWIP_Init(void);
 extern void MX_FATFS_Init(void);
+extern void MX_GRAPHICS_Init(void);
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
 /* USER CODE BEGIN FunctionPrototypes */
-
+void stat_disp_task(void const * argument);
 /* USER CODE END FunctionPrototypes */
 
 /* Hook prototypes */
@@ -100,6 +101,8 @@ void MX_FREERTOS_Init(void) {
   defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
+  osThreadDef(statDispTask, stat_disp_task, osPriorityNormal, 0, 128);
+  statDispTaskHandler = osThreadCreate(osThread(statDispTask), NULL);
   /* add threads, ... */
   /* USER CODE END RTOS_THREADS */
 
@@ -117,11 +120,14 @@ void StartDefaultTask(void const * argument)
   /* init code for FATFS */
   MX_FATFS_Init();
 
+/* Graphic application */  
+  //GRAPHICS_MainTask();
+
   /* USER CODE BEGIN StartDefaultTask */
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+    osDelay(100);
   }
   /* USER CODE END StartDefaultTask */
 }

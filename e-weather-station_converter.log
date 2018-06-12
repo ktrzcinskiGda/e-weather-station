@@ -1,0 +1,9 @@
+Project: e-weather-station
+Converter: ST System Workbench for STM32 project converter
+Date: 20180603
+
+Option == null: com.atollic.truestudio.gpp.misc
+No map found for id: gnu.cpp.link.option.flags
+No map found for id: gnu.cpp.debugging.level.max
+No map found for id: gnu.cpp.compiler.option.preprocessor.def.symbols
+Option == null: com.atollic.truestudio.gpp.misc

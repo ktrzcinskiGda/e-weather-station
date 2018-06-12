@@ -44,9 +44,6 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f7xx_hal.h"
-#include "stm32f7xx_ll_fmc.h"
-#include "stm32f7xx_hal_sdram.h"
-#include "stm32f7xx_hal_dma.h"
 
 /** @addtogroup BSP
   * @{

@@ -43,8 +43,7 @@
   ******************************************************************************
   */
 #include "main.h"
-#include "GUI.h"
-//#include "GUIDRV_Lin.h"
+#include "GUIDRV_Lin.h"
 
 #ifndef GUI_APP_H
 #define GUI_APP_H

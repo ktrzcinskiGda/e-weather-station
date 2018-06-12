@@ -14,5 +14,7 @@ Release_Notes.html
 Debug
 *.cproject
 *.project
+*.cproject_org
+*.project_org
 *.bak
 *.launch
