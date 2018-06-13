@@ -9,16 +9,17 @@
 #include "tcp.h"
 #include "string.h"
 #include "netif.h"
-
-typedef struct
-{
-	int temp;
-	char msg[50];
-}  weather_struct;
+#include "weather.h"
 
 weather_struct current_wheater;
 
-static struct tcp_pcb *testpcb;
+static struct tcp_pcb _testpcb;
+static struct tcp_pcb *testpcb = &_testpcb;
+
+const weather_struct* wheater_get_last()
+{
+	return &current_wheater;
+}
 
 uint32_t tcp_send_packet(void)
 {
@@ -68,38 +69,52 @@ err_t tcpRecvCallback(void *arg, struct tcp_pcb *tpcb, struct pbuf *p, err_t err
 
 
 void tcpErrorHandler(void *arg, err_t err)
-{}
+{
+	sprintf(current_wheater.msg, "Error %d", err);
+}
 
 
 err_t tcpSendCallback(void *arg, struct tcp_pcb *tpcb, u16_t len)
 {
+	sprintf(current_wheater.msg, "Tcp send %d", len);
 	return 0;
 }
 
 
 void weather_request()
 {
-	uint32_t data = 0xdeadbeef;
-
 	/* create an ip */
 	ip_addr_t ip;
 
-	IP4_ADDR(&ip, 110,777,888,999);    //IP of my PHP server
+	IP4_ADDR(&ip, 192,168,1,166);    //IP of my PHP server
 
+	/* now connect */
+	tcp_connect(testpcb, &ip, 8000, connectCallback);
+}
+
+void weather_request_task_init()
+{
 	/* create the control block */
 	testpcb = tcp_new();    //testpcb is a global struct tcp_pcb
 							// as defined by lwIP
 
-
 	/* dummy data to pass to callbacks*/
 
+	uint32_t data = 0xdeadbeef;
 	tcp_arg(testpcb, &data);
 
 	/* register callbacks with the pcb */
 	tcp_err(testpcb, tcpErrorHandler);
 	tcp_recv(testpcb, tcpRecvCallback);
 	tcp_sent(testpcb, tcpSendCallback);
+}
 
-	/* now connect */
-	tcp_connect(testpcb, &ip, 80, connectCallback);
+void weather_request_task(void const* arguments)
+{
+	weather_request_task_init();
+
+	do {
+		weather_request();
+		osDelay(3000);
+	} while(0);
 }

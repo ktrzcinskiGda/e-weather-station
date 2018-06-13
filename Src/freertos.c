@@ -57,13 +57,19 @@
 
 /* Variables -----------------------------------------------------------------*/
 osThreadId defaultTaskHandle;
+osThreadId statDispTaskHandle;
+osThreadId weatherRequestTHandle;
+osMutexId wheater_info_mutexHandle;
 
 /* USER CODE BEGIN Variables */
 osThreadId statDispTaskHandler;
+osThreadId weatherRequestTaskHandler;
 /* USER CODE END Variables */
 
 /* Function prototypes -------------------------------------------------------*/
 void StartDefaultTask(void const * argument);
+void stat_disp_task(void const * argument);
+void weather_request_task(void const * argument);
 
 extern void MX_LWIP_Init(void);
 extern void MX_FATFS_Init(void);
@@ -71,7 +77,6 @@ extern void MX_GRAPHICS_Init(void);
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
 /* USER CODE BEGIN FunctionPrototypes */
-void stat_disp_task(void const * argument);
 /* USER CODE END FunctionPrototypes */
 
 /* Hook prototypes */
@@ -82,6 +87,11 @@ void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN Init */
        
   /* USER CODE END Init */
+
+  /* Create the mutex(es) */
+  /* definition and creation of wheater_info_mutex */
+  osMutexDef(wheater_info_mutex);
+  wheater_info_mutexHandle = osMutexCreate(osMutex(wheater_info_mutex));
 
   /* USER CODE BEGIN RTOS_MUTEX */
   /* add mutexes, ... */
@@ -100,9 +110,15 @@ void MX_FREERTOS_Init(void) {
   osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 128);
   defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
+  /* definition and creation of statDispTask */
+  osThreadDef(statDispTask, stat_disp_task, osPriorityNormal, 0, 512);
+  statDispTaskHandle = osThreadCreate(osThread(statDispTask), NULL);
+
+//  /* definition and creation of weatherRequestT */
+//  osThreadDef(weatherRequestT, weather_request_task, osPriorityNormal, 0, 512);
+//  weatherRequestTHandle = osThreadCreate(osThread(weatherRequestT), NULL);
+
   /* USER CODE BEGIN RTOS_THREADS */
-  osThreadDef(statDispTask, stat_disp_task, osPriorityNormal, 0, 128);
-  statDispTaskHandler = osThreadCreate(osThread(statDispTask), NULL);
   /* add threads, ... */
   /* USER CODE END RTOS_THREADS */
 
@@ -124,9 +140,11 @@ void StartDefaultTask(void const * argument)
   //GRAPHICS_MainTask();
 
   /* USER CODE BEGIN StartDefaultTask */
+  weather_request_task_init();
   /* Infinite loop */
   for(;;)
   {
+	  weather_request();
     osDelay(100);
   }
   /* USER CODE END StartDefaultTask */

@@ -9,6 +9,7 @@
 #include "STM32746G-Discovery/stm32746g_discovery_lcd.h"
 #include "string.h"
 #include "lwip.h"
+#include "weather.h"
 
 void sprintip(char *dst, uint32_t ip)
 {
@@ -24,6 +25,7 @@ void stat_disp_task(const void *argument)
 {
 	extern struct netif gnetif;
 	int ip_line = 2;
+	int msg_line = 3;
 	char buf[100];
 	while(1) {
 		sprintf(buf, "ip: ");
@@ -31,6 +33,11 @@ void stat_disp_task(const void *argument)
 		BSP_LCD_SelectLayer(1);
 		BSP_LCD_ClearStringLine(ip_line);
 		BSP_LCD_DisplayStringAtLine(ip_line, buf);
+
+		const weather_struct* weather = wheater_get_last();
+		BSP_LCD_ClearStringLine(msg_line);
+		BSP_LCD_DisplayStringAtLine(msg_line, weather->msg);
+
 		osDelay(100);
 	}
 }

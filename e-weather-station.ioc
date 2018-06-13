@@ -1,8 +1,10 @@
 #MicroXplorer Configuration settings - do not modify
 ETH.IPParameters=MediaInterface
 ETH.MediaInterface=ETH_MEDIA_INTERFACE_RMII
-FREERTOS.IPParameters=Tasks01
-FREERTOS.Tasks01=defaultTask,0,128,StartDefaultTask,Default,NULL
+FREERTOS.FootprintOK=true
+FREERTOS.IPParameters=Tasks01,FootprintOK,Mutexes01
+FREERTOS.Mutexes01=wheater_info_mutex,Dynamic,NULL
+FREERTOS.Tasks01=defaultTask,0,128,StartDefaultTask,Default,NULL,Dynamic,NULL,NULL;statDispTask,0,128,stat_disp_task,As external,NULL,Dynamic,NULL,NULL;weatherRequestT,0,512,weather_request_task,As external,NULL,Dynamic,NULL,NULL
 File.Version=6
 GRAPHICS.GUI_Num_KBYTES=150
 GRAPHICS.IPParameters=Xsize_PHYS,Ysize_PHYS,GUI_Num_KBYTES,Num_MultBuffers,UseGUIBuilder,LIN_Display_Driver_Layer0,LIN_Display_Driver_Layer1
