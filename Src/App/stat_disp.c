@@ -37,6 +37,10 @@ void stat_disp_task(const void *argument)
 		const weather_struct* weather = wheater_get_last();
 		BSP_LCD_ClearStringLine(msg_line);
 		BSP_LCD_DisplayStringAtLine(msg_line, weather->msg);
+		BSP_LCD_ClearStringLine(msg_line+1);
+		BSP_LCD_DisplayStringAtLine(msg_line+1, weather->status1);
+		BSP_LCD_ClearStringLine(msg_line+2);
+		BSP_LCD_DisplayStringAtLine(msg_line+2, weather->status2);
 
 		osDelay(100);
 	}

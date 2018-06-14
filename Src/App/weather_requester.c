@@ -24,8 +24,8 @@ const weather_struct* wheater_get_last()
 uint32_t tcp_send_packet(void)
 {
     char *string =
-    		"HEAD /process.php?data1=12&data2=5 HTTP/1.0\r\n"
-    		"Host: mywebsite.com\r\n"
+    		"GET /data/2.5/weather?id=3099434&appid=dc9bedfedd6ab50770a9f0a23ad34f3c&units=metric HTTP/1.1\r\n"
+    		"Host: api.openweathermap.org\r\n"
     		"\r\n ";
     uint32_t len = strlen(string);
 
@@ -54,14 +54,67 @@ err_t connectCallback(void *arg, struct tcp_pcb *tpcb, err_t err)
     return 0;
 }
 
+char* json_find(const char* data, const char* key, int* len)
+{
+	char *res_start;
+	int key_len = strlen(key);
+	int i;
+	while(data[0] != 0){
+		i = 0;
+		while(data[i] == key[i] && key[i] != 0) {
+			++i;
+		}
+
+		if(i != key_len){
+			data += i + 1;
+		} else {
+			i += 1; // ommit "
+			if(data[i] != ':') ++i;
+			++i; // ommit :
+			if(data[i] == '"') ++i;
+			res_start = &data[i];
+			while(data[i] != '"' && data[i] != ',' && data[i] != 0) ++i;
+			*len = (int)(&data[i] - res_start);
+			return res_start;
+		}
+	}
+	return 0;
+}
+
 err_t tcpRecvCallback(void *arg, struct tcp_pcb *tpcb, struct pbuf *p, err_t err)
 {
     if (p == NULL) {
-    	sprintf(current_wheater.msg, "Connection closed");
+    	//sprintf(current_wheater.msg + strlen(current_wheater.msg), "Connection closed");
         tcp_close(tpcb);
         return ERR_ABRT;
     } else {
-    	snprintf(current_wheater.msg, 50, "received %dB: %s", p->tot_len, (char *)p->payload);
+    	char *data;
+    	int len;
+
+    	data = json_find((char *)p->payload, "name", &len);
+    	if(data != 0) strncpy(current_wheater.localization, data, len);
+
+    	data = json_find((char *)p->payload, "temp", &len);
+    	if(data != 0) current_wheater.temp = atoi(data);
+
+    	data = json_find((char *)p->payload, "pressure", &len);
+    	if(data != 0) current_wheater.pressure = atoi(data);
+
+    	data = json_find((char *)p->payload, "speed", &len);
+    	if(data != 0) current_wheater.wind_speed = atoi(data);
+
+    	data = json_find((char *)p->payload, "deg", &len);
+    	if(data != 0) current_wheater.wind_deg = atoi(data);
+
+    	data = json_find((char *)p->payload, "humidity", &len);
+    	if(data != 0) current_wheater.humidity = atoi(data);
+
+    	data = json_find((char *)p->payload, "main\"", &len);
+    	if(data != 0) strncpy(current_wheater.description, data-1, len);
+
+    	snprintf(current_wheater.msg, WEATHER_LINE_LEN, "%s %s", current_wheater.localization, current_wheater.description);
+    	snprintf(current_wheater.status1, WEATHER_LINE_LEN, "%2d*C %3d%% %4dhPa", current_wheater.temp, current_wheater.humidity, current_wheater.pressure);
+    	snprintf(current_wheater.status2, WEATHER_LINE_LEN, "wind %2dm/s %3ddeg", current_wheater.wind_speed, current_wheater.wind_deg);
     }
 
     return 0;
@@ -86,10 +139,13 @@ void weather_request()
 	/* create an ip */
 	ip_addr_t ip;
 
-	IP4_ADDR(&ip, 192,168,1,166);    //IP of my PHP server
+	//IP4_ADDR(&ip, 192,168,1,166);    //IP of my PHP server
+	IP4_ADDR(&ip, 162,243,53,59);    //IP of api.openweathermap.org
+	//IP4_ADDR(&ip, 192,241,169,168);    //IP of api.openweathermap.org
+	//IP4_ADDR(&ip, 34,237,148,235);    //IP of api.openweathermap.org
 
 	/* now connect */
-	tcp_connect(testpcb, &ip, 8000, connectCallback);
+	tcp_connect(testpcb, &ip, 80, connectCallback);
 }
 
 void weather_request_task_init()
@@ -115,6 +171,6 @@ void weather_request_task(void const* arguments)
 
 	do {
 		weather_request();
-		osDelay(3000);
+		osDelay(10*60*1000);
 	} while(0);
 }
