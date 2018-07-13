@@ -59,6 +59,7 @@
 
 /* USER CODE BEGIN Includes */
 #include "stm32746g_discovery_lcd.h"
+#include "stm32746g_discovery_ts.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -125,15 +126,17 @@ int main(void)
   BSP_LCD_Clear(LCD_COLOR_BLACK);
   BSP_LCD_SelectLayer(1);
   BSP_LCD_Clear(LCD_COLOR_BLACK);
-  BSP_LCD_DisplayStringAtLine(2, "Czesc Igor");
+  BSP_LCD_DisplayStringAtLine(2, "Starting...");
 
+  BSP_TS_Init(BSP_LCD_GetXSize(), BSP_LCD_GetYSize());
+  //BSP_TS_ITConfig();
   /* USER CODE END 2 */
 
 /* Initialise the graphical hardware */
   //GRAPHICS_HW_Init();
 
   /* Initialise the graphical stack engine */
-  //GRAPHICS_Init();
+  GRAPHICS_Init();
       
   /* Call init function for freertos objects (in freertos.c) */
   MX_FREERTOS_Init();

@@ -74,7 +74,7 @@ char* json_find(const char* data, const char* key, int* len)
 			if(data[i] == '"') ++i;
 			res_start = &data[i];
 			while(data[i] != '"' && data[i] != ',' && data[i] != 0) ++i;
-			*len = (int)(&data[i] - res_start);
+			*len = (int)(&data[i] - res_start) + 1;
 			return res_start;
 		}
 	}

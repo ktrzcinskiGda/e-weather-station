@@ -114,6 +114,26 @@ void DMA2D_IRQHandler(void)
 }
 
 /* USER CODE BEGIN 1 */
+#include "STM32746G-Discovery/stm32746g_discovery_ts.h"
+TS_StateTypeDef ts_state;
 
+void EXTI15_10_IRQHandler(void) {
+  NVIC_ClearPendingIRQ(EXTI15_10_IRQn);
+	static int i = 0;
+	BSP_TS_GetState(&ts_state);
+	BSP_TS_Get_GestureId(&ts_state);
+	//BSP_TS_ITClear();
+	while(ts_state.touchDetected) {
+		BSP_TS_GetState(&ts_state);
+	}
+	if(i == 0) {
+		ts_state.gestureId = GEST_ID_MOVE_UP;
+		i = 1;
+	} else {
+		ts_state.gestureId = GEST_ID_MOVE_DOWN;
+		i = 0;
+	}
+	BSP_TS_ITConfig();
+}
 /* USER CODE END 1 */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

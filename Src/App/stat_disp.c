@@ -7,6 +7,7 @@
 
 
 #include "STM32746G-Discovery/stm32746g_discovery_lcd.h"
+#include "STM32746G-Discovery/stm32746g_discovery_ts.h"
 #include "string.h"
 #include "lwip.h"
 #include "weather.h"
@@ -24,6 +25,7 @@ void sprintip(char *dst, uint32_t ip)
 void stat_disp_task(const void *argument)
 {
 	extern struct netif gnetif;
+	extern TS_StateTypeDef ts_state;
 	int ip_line = 2;
 	int msg_line = 3;
 	char buf[100];
@@ -43,5 +45,20 @@ void stat_disp_task(const void *argument)
 		BSP_LCD_DisplayStringAtLine(msg_line+2, weather->status2);
 
 		osDelay(100);
+
+		BSP_TS_GetState(&ts_state);
+		switch(ts_state.touchDetected) {
+		case 1:
+			ts_state.gestureId = GEST_ID_NO_GESTURE;
+			BSP_LCD_DisplayOn();
+			break;
+		case 2:
+			ts_state.gestureId = GEST_ID_NO_GESTURE;
+			BSP_LCD_DisplayOff();
+			__WFI();
+			break;
+		default:
+			break;
+		}
 	}
 }
